@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import React, { useEffect } from "react";
 import "../global.css";
 import { AuthContextProvider, useAuth } from "../context/authContext";
+import { MenuProvider } from "react-native-popup-menu";
 
 const MainLayout = ({ children }) => {
   const { isAuthenticated, user } = useAuth();
@@ -24,8 +25,10 @@ const MainLayout = ({ children }) => {
 
 export default function RootLayout() {
   return (
-    <AuthContextProvider className="flex-1">
-      <MainLayout />
-    </AuthContextProvider>
+    <MenuProvider>
+      <AuthContextProvider className="flex-1">
+        <MainLayout />
+      </AuthContextProvider>
+    </MenuProvider>
   );
 }

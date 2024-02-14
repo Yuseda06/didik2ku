@@ -60,32 +60,6 @@ export default function profile() {
     setEditedUsername(profileUsernameSource);
   }, [isUsernameUpdated]);
 
-  // useEffect(() => {
-  //   navigation.addListener("beforeRemove", (e) => {
-  //     e.preventDefault();
-
-  //     if (isPictureTaken) {
-  //       Alert.alert(
-  //         "Oops",
-  //         "You have not updated your profile picture yet. Do you want to leave without updating?",
-  //         [
-  //           {
-  //             text: "No",
-  //             style: "cancel",
-  //           },
-  //           {
-  //             text: "Yes",
-  //             onPress: () => {
-  //               // User chose to leave without updating, navigate back
-  //               router.push("/home");
-  //             },
-  //           },
-  //         ]
-  //       );
-  //     }
-  //   });
-  // }, [isPictureTaken]);
-
   const pickImage = async () => {
     resetPicture();
 
@@ -124,7 +98,6 @@ export default function profile() {
     const docSnap = await getDoc(docRef);
     updateProfile({
       username: editedUsername,
-      staffId: editedStaffId,
     });
 
     try {
@@ -136,7 +109,6 @@ export default function profile() {
       if (docSnap.exists()) {
         await updateDoc(docRef, {
           username: editedUsername,
-          staffId: editedStaffId,
           profileUrl: updatedProfileUrl || null, // Use null if updatedProfileUrl is empty
         });
         setLoading(false);
@@ -184,11 +156,11 @@ export default function profile() {
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      className="flex-1 bg-white px-4 "
+      className="flex-1 bg-[#ffff] px-4 "
     >
       <StatusBar style="dark" />
       <ProfileHeader user={user} router={router} key={user.userId} />
-      <View className="h3 border-b border-neutral-200 " />
+      <View className="h3 border-b border-[#e4e4e4] " />
 
       <View className="flex-1  items-center justify-start relative  pt-10">
         <View
@@ -220,7 +192,7 @@ export default function profile() {
         <View className="flex-1 gap-4 w-full px-4 mt-10">
           <View
             style={{ height: hp(7) }}
-            className="flex-row gap-4 px-4 bg-neutral-100 mt-30 items-center rounded-xl"
+            className="flex-row gap-4 px-4 bg-[#e4e4e4] mt-30 items-center rounded-xl"
           >
             <Feather name="user" size={hp(2.4)} color="gray" />
             <TextInput
@@ -231,21 +203,6 @@ export default function profile() {
               placeholder="Username"
               placeholderTextColor={"#555555"}
               onFocus={() => {}}
-            />
-          </View>
-
-          <View
-            style={{ height: hp(7) }}
-            className="flex-row gap-4 px-4 bg-neutral-100 items-center rounded-xl"
-          >
-            <FontAwesome name="id-card-o" size={hp(2.4)} color="gray" />
-            <TextInput
-              value={editedStaffId}
-              onChangeText={(value) => setEditedStaffId(value)}
-              style={{ fontSize: hp(2), height: hp(8) }}
-              className="flex-1 font-semibold text-neutral-700"
-              placeholder="Staff ID"
-              placeholderTextColor={"#555555"}
             />
           </View>
 
@@ -260,11 +217,11 @@ export default function profile() {
                   updateUserData(user?.userId);
                 }}
                 style={{ height: hp(6.5) }}
-                className="bg-teal-700 rounded-xl justify-center items-center mt-6"
+                className="bg-secondary rounded-xl justify-center items-center mt-6"
               >
                 <Text
                   style={{ fontSize: hp(2.7) }}
-                  className="text-white font-bold"
+                  className="text-[#ffff] font-bold"
                 >
                   Update profile
                 </Text>

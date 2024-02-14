@@ -7,7 +7,14 @@ import {
 } from "react-native";
 import React, { Children } from "react";
 
-export default function CustomKeyboard({ children }) {
+export default function CustomKeyboard({ children, inChat }) {
+  let kavConfig = {};
+  let scrollViewConfig = {};
+  if (inChat) {
+    kavConfig = { keyboardVerticalOffset: 90 };
+    scrollViewConfig = { contentContainerStyle: { flex: 1 } };
+  }
+
   const ios = Platform.OS === "ios";
   return (
     <KeyboardAvoidingView
@@ -18,6 +25,7 @@ export default function CustomKeyboard({ children }) {
         style={{ flex: 1 }}
         bounces={false}
         showsVerticalScrollIndicator={false}
+        {...scrollViewConfig}
       >
         {children}
       </ScrollView>

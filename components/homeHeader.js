@@ -13,38 +13,19 @@ import {
   MenuOption,
   MenuOptions,
   MenuTrigger,
+  MenuProvider,
 } from "react-native-popup-menu";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { MenuItem } from "./customMenuItems";
 import { LinearGradient } from "expo-linear-gradient";
 import GreetingText from "./greeting";
 import { router } from "expo-router";
-import {
-  useProfileStore,
-  usePictureStore,
-  useUsernameStore,
-} from "../zustand/userProfileStore";
 
 const ios = Platform.OS === "ios";
 
 export default function HomeHeader() {
   const { user, logout } = useAuth();
   const { top } = useSafeAreaInsets();
-  const { userProfile, updateProfile } = useProfileStore();
-  const { isPictureTaken, takePicture, resetPicture } = usePictureStore();
-  const { isUsernameUpdated } = useUsernameStore();
-
-  console.log("userProfile in homeHeader", user?.profileUrl);
-
-  const profileImageSource = isPictureTaken
-    ? { uri: userProfile?.profileUrl }
-    : { uri: user?.profileUrl };
-
-  const profileUsernameSource = isUsernameUpdated
-    ? userProfile?.username
-    : user?.username;
-
-  console.log("profileUsernameSource in homeHeader", profileUsernameSource);
 
   const handleProfile = () => {
     router.push("/profile");
@@ -71,7 +52,7 @@ export default function HomeHeader() {
       }}
     >
       <LinearGradient
-        colors={["#4eb1e3", "#66b2b2", "#008080"]}
+        colors={["#ffaf00", "#ffaf00", "#ffaf00"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 2 }}
         style={{
@@ -89,10 +70,11 @@ export default function HomeHeader() {
           <Pressable>
             <Feather name="menu" size={hp(3)} color="white" />
           </Pressable>
-          <GreetingText user={profileUsernameSource} />
+          <GreetingText user={user} />
         </View>
+
         <View>
-          {/* <Menu>
+          <Menu>
             <MenuTrigger>
               <Image
                 style={{
@@ -123,7 +105,7 @@ export default function HomeHeader() {
                 text="Profile"
                 action={handleProfile}
                 value={null}
-                icon={<Feather name="user" size={hp(3.5)} color="#737373" />}
+                icon={<Feather name="user" size={hp(2.5)} color="#737373" />}
               />
               <Divider />
               <MenuItem
@@ -131,11 +113,11 @@ export default function HomeHeader() {
                 action={handleLogout}
                 value={null}
                 icon={
-                  <AntDesign name="logout" size={hp(3.5)} color="#737373" />
+                  <AntDesign name="logout" size={hp(2.5)} color="#737373" />
                 }
               />
             </MenuOptions>
-          </Menu> */}
+          </Menu>
         </View>
       </LinearGradient>
     </View>

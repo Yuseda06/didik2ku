@@ -9,7 +9,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-export default function ProfileHeader({ user, router }) {
+export default function ChatRoomHeader({ user, router }) {
   return (
     <Stack.Screen
       options={{
@@ -28,17 +28,17 @@ export default function ProfileHeader({ user, router }) {
 
               <Text
                 style={{ fontSize: hp(2.0) }}
-                className=" font-medium pl-2  text-neutral-500"
+                className=" font-medium   text-neutral-500"
               >
-                Edit Profile - {user.username}
+                {user.username}
               </Text>
             </View>
           </View>
         ),
         headerRight: () => (
           <View className="flex-row items-center gap-8">
-            {/* <Ionicons name="call" size={hp(3)} color="#737373" />
-            <Ionicons name="videocam" size={hp(3)} color="#737373" /> */}
+            <Ionicons name="call" size={hp(3)} color="#737373" />
+            <Ionicons name="videocam" size={hp(3)} color="#737373" />
           </View>
         ),
         title: "",

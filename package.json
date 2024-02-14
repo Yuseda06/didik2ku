@@ -13,11 +13,12 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@react-native-google-signin/google-signin": "^11.0.0",
     "@expo/vector-icons": "^14.0.0",
     "@fortawesome/fontawesome-free": "^6.5.1",
     "@react-native-async-storage/async-storage": "1.21.0",
     "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-google-signin/google-signin": "^11.0.0",
+    "@react-navigation/drawer": "^6.6.7",
     "@react-navigation/native": "^6.0.2",
     "expo": "~50.0.6",
     "expo-constants": "~15.4.5",

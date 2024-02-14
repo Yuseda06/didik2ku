@@ -22,7 +22,7 @@ const GreetingText = ({ user }) => {
       <Text style={{ fontSize: hp(1.7), color: "white" }}>{greeting}</Text>
 
       <Text style={{ fontSize: hp(1.7), color: "white" }} className="font-bold">
-        {user}
+        {user?.username}
       </Text>
     </View>
   );

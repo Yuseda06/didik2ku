@@ -94,6 +94,7 @@ export default function SignIn() {
                 className="flex-1 font-semibold text-neutral-700 "
                 placeholder="Email address"
                 placeholderTextColor={"#555555"}
+                autoCapitalize="none"
               />
             </View>
 
