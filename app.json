@@ -17,10 +17,12 @@
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.yuseda06.didik2ku"
     },
     "web": {
       "bundler": "metro",
@@ -30,6 +32,14 @@
     "plugins": ["expo-router", "@react-native-google-signin/google-signin"],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "eaa5f558-f3f9-4cd5-9446-ce1889e1b2ef"
+      }
     }
   }
 }
