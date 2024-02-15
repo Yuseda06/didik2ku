@@ -19,13 +19,15 @@ import { AntDesign, Feather } from "@expo/vector-icons";
 import { MenuItem } from "./customMenuItems";
 import { LinearGradient } from "expo-linear-gradient";
 import GreetingText from "./greeting";
-import { router } from "expo-router";
+import { router, useNavigation } from "expo-router";
+import { DrawerActions } from "@react-navigation/native";
 
 const ios = Platform.OS === "ios";
 
 export default function HomeHeader() {
   const { user, logout } = useAuth();
   const { top } = useSafeAreaInsets();
+  const navigation = useNavigation();
 
   const handleProfile = () => {
     router.push("/profile");
@@ -35,8 +37,13 @@ export default function HomeHeader() {
     await logout();
   };
 
+  const handleDrawer = () => {
+    navigation.dispatch(DrawerActions.openDrawer());
+  };
+
   return (
     <View
+      className="w-full"
       style={{
         shadowColor: "#000",
         shadowOffset: {
@@ -67,7 +74,7 @@ export default function HomeHeader() {
         }}
       >
         <View className=" flex-row gap-4 justify-center items-center">
-          <Pressable>
+          <Pressable onPress={() => handleDrawer()}>
             <Feather name="menu" size={hp(3)} color="white" />
           </Pressable>
           <GreetingText user={user} />

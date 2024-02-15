@@ -159,7 +159,7 @@ export default function profile() {
       className="flex-1 bg-[#ffff] px-4 "
     >
       <StatusBar style="dark" />
-      <ProfileHeader user={user} router={router} key={user.userId} />
+      {/* <ProfileHeader user={user} router={router} key={user.userId} /> */}
       <View className="h3 border-b border-[#e4e4e4] " />
 
       <View className="flex-1  items-center justify-start relative  pt-10">

@@ -4,6 +4,8 @@ import {
   Button,
   ActivityIndicator,
   ScrollView,
+  Pressable,
+  SafeAreaView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/authContext";
@@ -15,14 +17,20 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import ChatList from "./chatList";
 import Loading from "../../components/loading";
 import { usersRef } from "../../firebaseConfig";
 import { getDocs, query, where } from "firebase/firestore";
+import { router, useNavigation } from "expo-router";
+import { DrawerActions } from "@react-navigation/native";
 
 export default function Home() {
   const { logout, user } = useAuth();
   const [users, setUsers] = useState([]);
+  const navigation = useNavigation();
+
+  const handleDrawer = () => {
+    navigation.dispatch(DrawerActions.openDrawer());
+  };
 
   useEffect(() => {
     if (user?.uid) getUsers();
@@ -45,10 +53,10 @@ export default function Home() {
   };
 
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-transparent pt-10">
       <StatusBar style="light" />
 
-      <Chart />
+      {/* <Chart /> */}
 
       {/* {users?.length > 0 ? (
         <ChatList currentUser={user} users={users} />

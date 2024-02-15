@@ -20,7 +20,7 @@ const MainLayout = ({ children }) => {
     }
   }, [isAuthenticated]);
 
-  return <Slot />;
+  return <Slot></Slot>;
 };
 
 export default function RootLayout() {
