@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React, { useState } from "react";
-import FloatingButton from "../../../components/floatingButton";
-import RightSlideModal from "../../../components/rightSlideModal";
+import FloatingButton from "../../components/floatingButton";
+import RightSlideModal from "../../components/rightSlideModal";
 
 export default function Vocab() {
   const [modalVisible, setModalVisible] = useState(false);

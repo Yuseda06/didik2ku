@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
-import { dbRealtime } from "../../../firebaseConfig";
+import { dbRealtime } from "../../firebaseConfig";
 import { ref, onValue } from "firebase/database";
 
 export default function AddVocab() {

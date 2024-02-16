@@ -118,20 +118,20 @@ export default function RootLayout() {
         }}
       />
       <Drawer.Screen
-        name="(english)/vocab"
+        name="english"
         options={{
           drawerActiveBackgroundColor: "#fcf5e6",
           drawerLabelStyle: {
             color: "#808080",
           },
-          drawerLabel: "Vocabulary",
-          title: "Vocabulary",
+          drawerLabel: "English",
+          title: "English",
           drawerIcon: () => (
             <Ionicons name="basketball" size={30} color="#ffaf00" />
           ),
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="(english)/addVocab"
         options={{
           drawerActiveBackgroundColor: "#fcf5e6",
@@ -143,7 +143,7 @@ export default function RootLayout() {
           title: "Vocabulary",
           drawerIcon: () => <Ionicons name="add" size={30} color={"#ffaf00"} />,
         }}
-      />
+      /> */}
     </Drawer>
   );
 }
