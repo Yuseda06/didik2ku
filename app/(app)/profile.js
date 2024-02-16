@@ -217,7 +217,7 @@ export default function profile() {
                   updateUserData(user?.userId);
                 }}
                 style={{ height: hp(6.5) }}
-                className="bg-secondary rounded-xl justify-center items-center mt-6"
+                className="bg-[#ffaf00] rounded-xl justify-center items-center mt-6"
               >
                 <Text
                   style={{ fontSize: hp(2.7) }}

@@ -157,7 +157,7 @@ export default function SignUp() {
                     >
                       <View
                         style={{ height: hp(7) }}
-                        className="bg-secondary rounded-xl justify-center items-center"
+                        className="bg-[#ffaf00] rounded-xl justify-center items-center"
                       >
                         <Text
                           style={{ fontSize: hp(2.7) }}
@@ -186,7 +186,7 @@ export default function SignUp() {
                   >
                     <Text
                       style={{ fontSize: hp(1.8) }}
-                      className="font-bold text-secondary"
+                      className="font-bold text-[#ffaf00]"
                     >
                       Sign In
                     </Text>

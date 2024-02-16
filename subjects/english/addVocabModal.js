@@ -16,7 +16,7 @@ export default function AddVocabModal({ isVisible, onClose, onAddWord }) {
 
   return (
     <Modal visible={isVisible} animationType="slide">
-      <View className="flex-1 justify-end bg-secondary  pb-40 ">
+      <View className="flex-1 justify-end bg-[#ffaf00]  pb-40 ">
         <View className="justify-center items-center gap-10">
           <TextInput
             placeholder="Enter word"

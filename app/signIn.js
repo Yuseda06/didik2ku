@@ -117,7 +117,7 @@ export default function SignIn() {
                 <TouchableOpacity className="h-12  justify-center items-end pl-4">
                   <Text
                     style={{ fontSize: hp(1.8) }}
-                    className="font-semibold text-right text-secondary "
+                    className="font-semibold text-right text-[#ffaf00] "
                   >
                     Forgot password?
                   </Text>
@@ -138,7 +138,7 @@ export default function SignIn() {
                 >
                   <View
                     style={{ height: hp(7) }}
-                    className="bg-secondary rounded-xl justify-center items-center"
+                    className="bg-[#ffaf00] rounded-xl justify-center items-center"
                   >
                     <Text
                       style={{ fontSize: hp(2.7) }}
@@ -167,7 +167,7 @@ export default function SignIn() {
               >
                 <Text
                   style={{ fontSize: hp(1.8) }}
-                  className="font-bold text-secondary"
+                  className="font-bold text-[#ffaf00]"
                 >
                   Sign Up
                 </Text>
