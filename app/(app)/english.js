@@ -6,13 +6,16 @@ import {
   ScrollView,
   FlatList,
   StyleSheet,
+  TouchableOpacity,
 } from "react-native";
 import { dbRealtime } from "../../firebaseConfig";
 import { ref, onValue, push, set } from "firebase/database";
 import AddVocabModal from "../../subjects/english/addVocabModal";
 import { useAuth } from "../../context/authContext";
 import FloatingButton from "../../components/floatingButton";
-import Carousel from "react-native-snap-carousel";
+import Swiper from "react-native-swiper";
+import { Dimensions } from "react-native";
+import { Audio } from "expo-av";
 
 export default function AddVocab() {
   const [users, setUsers] = useState([]);
@@ -74,44 +77,52 @@ export default function AddVocab() {
     }
   };
 
-  return (
-    <View className="flex-1 ">
-      <ScrollView className="flex-1 bg-white">
-        <AddVocabModal
-          isVisible={isModalVisible}
-          onClose={() => setIsModalVisible(false)}
-          onAddWord={handleAddWord}
-        />
+  const speakText = async (text) => {
+    if (text) {
+      const speech = new Audio.Sound();
+      try {
+        await speech.loadAsync({
+          uri: `https://translate.google.com/translate_tts?ie=UTF-8&q=${text}&tl=en&client=tw-ob`,
+        });
+        await speech.playAsync();
+      } catch (error) {
+        console.error("Error speaking text:", error);
+      }
+    }
+  };
 
-        {/* Render your users data as needed */}
-        <View
-          className=" mt-10 "
-          style={{ shadowOpacity: 1, shadowColor: "gray", shadowOffset: [] }}
-        >
-          {users.map(
-            (user) =>
-              user?.id === user1 && (
-                <View key={user.id} className="h-[400px] w-full bg-white">
-                  {/* Render words and meanings using react-native-snap-carousel */}
-                  <Carousel
-                    data={Object.entries(
-                      user.english?.vocab?.lesson1?.words || []
-                    )}
-                    renderItem={({ item: [word, { meaning }] }) => (
-                      <View style={styles.card}>
-                        <Text>{word}</Text>
-                        <Text>{meaning}</Text>
-                      </View>
-                    )}
-                    sliderWidth={300} // Set your desired slider width
-                    itemWidth={300} // Set your desired item width
-                    layout={"default"}
-                  />
-                </View>
-              )
-          )}
-        </View>
-      </ScrollView>
+  return (
+    <View className="flex-1 pt-4 pb-[70px] px-[10px]  ">
+      <AddVocabModal
+        isVisible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        onAddWord={handleAddWord}
+      />
+      {users.map(
+        (user) =>
+          user?.id === user1 && (
+            <Swiper
+              showsButtons={false}
+              loop={false} // Change as needed // Change as needed
+            >
+              {Object.entries(user.english?.vocab?.lesson1?.words || []).map(
+                ([word, { meaning }]) => (
+                  <TouchableOpacity
+                    key={word}
+                    style={styles.card}
+                    className="bg-white mb-2 flex-1 justify-center shadow  rounded-3xl items-center m-10"
+                    onPress={() => speakText(word)}
+                  >
+                    <Text className="text-4xl">{word}</Text>
+                    <Text className="text-[60px] text-neutral-600">
+                      {meaning}
+                    </Text>
+                  </TouchableOpacity>
+                )
+              )}
+            </Swiper>
+          )
+      )}
       <FloatingButton onPress={() => setIsModalVisible(true)} />
     </View>
   );
@@ -122,19 +133,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   card: {
-    height: 400,
-    width: 300,
-    backgroundColor: "#ffff", // Use your desired color
-    borderRadius: 20,
-    shadowColor: "#000",
+    // height: Dimensions.get("window").height - 250,
+    // width: Dimensions.get("window").width - 50,
+
+    shadowColor: "#d3d3d3",
     shadowOffset: {
       width: 0,
       height: 0,
     },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.55,
     shadowRadius: 9.84,
-    elevation: 9,
-    padding: 20,
-    marginTop: 10,
+    elevation: 20,
+    // padding: 20,
+    // marginTop: 10,
   },
 });

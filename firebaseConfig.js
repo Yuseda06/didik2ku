@@ -10,15 +10,14 @@ import { getDatabase } from "firebase/database";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBpqupQahaJomBgTHjWqBhu9TxwW9jE3Qo",
-  authDomain: "didik2ku.firebaseapp.com",
-  projectId: "didik2ku",
-  storageBucket: "didik2ku.appspot.com",
-  messagingSenderId: "783471223137",
-  appId: "1:783471223137:web:2e7e3f98b2dc15e0eb2520",
-  measurementId: "G-ZQDDQ6VGY5",
-  databaseURL:
-    "https://didik2ku-default-rtdb.asia-southeast1.firebasedatabase.app",
+  apiKey: process.env.EXPO_PUBLIC_API_KEY,
+  authDomain: process.env.EXPO_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.EXPO_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.EXPO_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.EXPO_PUBLIC_APP_ID,
+  measurementId: process.env.EXPO_PUBLIC_MEASUREMENT_ID,
+  databaseURL: process.env.EXPO_PUBLIC_DATABASE_URL,
 };
 
 // Initialize Firebase
