@@ -107,12 +107,13 @@ export default function AddVocab() {
           user?.id === user1 && (
             <Swiper
               showsButtons={false}
-              loop={false} // Change as needed // Change as needed
+              loop={false}
+              key={user.id} // Add a unique key for the Swiper component
             >
               {Object.entries(user.english?.vocab?.words || []).map(
                 ([word, { meaning }]) => (
                   <TouchableOpacity
-                    key={word}
+                    key={`${user.id}_${word}`} // Concatenate user.id with word for uniqueness
                     style={styles.card}
                     className="bg-white mb-2 flex-1 justify-center shadow  gap-4 rounded-3xl items-center m-10"
                     onPress={() => speakText(word)}
