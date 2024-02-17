@@ -1,13 +1,29 @@
 // AddVocabModal.js
-import React, { useState } from "react";
-import { View, Modal, TextInput, Button } from "react-native";
+import { Feather, FontAwesome, Ionicons } from "@expo/vector-icons";
+import React, { useEffect, useState } from "react";
+import { View, Modal, TextInput, Button, TouchableOpacity } from "react-native";
+import translate from "translate-google-api";
 
 export default function AddVocabModal({ isVisible, onClose, onAddWord }) {
   const [word, setWord] = useState("");
   const [meaning, setMeaning] = useState("");
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await translate(word, { from: "en", to: "ms" });
+        setMeaning(result);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    };
+
+    if (word) {
+      fetchData();
+    }
+  }, [word]);
+
   const handleAddWord = () => {
-    // Add your validation logic here if needed
     onAddWord(word, meaning);
     setWord("");
     setMeaning("");
@@ -16,20 +32,24 @@ export default function AddVocabModal({ isVisible, onClose, onAddWord }) {
 
   return (
     <Modal visible={isVisible} animationType="slide">
-      <View className="flex-1 justify-end bg-[#ffaf00]  pb-40 ">
-        <View className="justify-center items-center gap-10">
+      <View className="flex-1 justify-center bg-[#ffaf00]   ">
+        <View className="justify-center items-center gap-40">
           <TextInput
             placeholder="Enter word"
             value={word}
             onChangeText={(text) => setWord(text)}
+            className="text-4xl"
           />
-          <TextInput
-            placeholder="Enter meaning"
-            value={meaning}
-            onChangeText={(text) => setMeaning(text)}
-          />
-          <Button title="Add Word" onPress={handleAddWord} />
-          <Button title="Cancel" onPress={onClose} />
+
+          <View className="flex flex-row gap-16">
+            <TouchableOpacity onPress={handleAddWord}>
+              <Feather name="plus-circle" size={60} color="white" />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={onClose}>
+              <Feather name="x-circle" size={60} color="white" />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>

@@ -16,10 +16,12 @@ import FloatingButton from "../../components/floatingButton";
 import Swiper from "react-native-swiper";
 import { Dimensions } from "react-native";
 import { Audio } from "expo-av";
+import translate from "translate-google-api";
 
 export default function AddVocab() {
   const [users, setUsers] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [meaning, setMeaning] = useState("");
   const { user } = useAuth();
   const user1 = user?.username;
 
@@ -50,10 +52,12 @@ export default function AddVocab() {
   }, []);
 
   const handleAddWord = (word, meaning) => {
+    console.log("word in english", word);
+    console.log("meaning in english", meaning);
     if (user?.username) {
       const userLessonRef = ref(
         dbRealtime,
-        `users/${user?.username}/english/vocab/lesson1/words/${word}`
+        `users/${user?.username}/english/vocab/words/${word}`
       );
 
       // Set the meaning directly under the word
@@ -67,7 +71,7 @@ export default function AddVocab() {
 
       const newUserLessonRef = ref(
         dbRealtime,
-        `users/${newUserId}/english/vocab/lesson1/words/${word}`
+        `users/${newUserId}/english/vocab/words/${word}`
       );
 
       // Set the meaning directly under the word
@@ -105,16 +109,18 @@ export default function AddVocab() {
               showsButtons={false}
               loop={false} // Change as needed // Change as needed
             >
-              {Object.entries(user.english?.vocab?.lesson1?.words || []).map(
+              {Object.entries(user.english?.vocab?.words || []).map(
                 ([word, { meaning }]) => (
                   <TouchableOpacity
                     key={word}
                     style={styles.card}
-                    className="bg-white mb-2 flex-1 justify-center shadow  rounded-3xl items-center m-10"
+                    className="bg-white mb-2 flex-1 justify-center shadow  gap-4 rounded-3xl items-center m-10"
                     onPress={() => speakText(word)}
                   >
-                    <Text className="text-4xl">{word}</Text>
-                    <Text className="text-[60px] text-neutral-600">
+                    <Text style={{ color: "#cc9900" }} className="text-[60px] ">
+                      {word}
+                    </Text>
+                    <Text style={{ color: "#808080" }} className="text-[40px] ">
                       {meaning}
                     </Text>
                   </TouchableOpacity>
@@ -133,9 +139,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   card: {
-    // height: Dimensions.get("window").height - 250,
-    // width: Dimensions.get("window").width - 50,
-
     shadowColor: "#d3d3d3",
     shadowOffset: {
       width: 0,
@@ -144,7 +147,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.55,
     shadowRadius: 9.84,
     elevation: 20,
-    // padding: 20,
-    // marginTop: 10,
   },
 });
